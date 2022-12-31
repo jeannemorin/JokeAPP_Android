@@ -1,4 +1,4 @@
-package api
+package com.example.jokeappv2.model
 import com.squareup.moshi.Json
 
 data class Joke(

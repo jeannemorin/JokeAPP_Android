@@ -1,4 +1,4 @@
-package com.ex
+package com.example.jokeappv2.display
 
 import com.example.jokeappv2.Repository
 
@@ -17,8 +17,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import api.Joke
-import api.JokeApi
+import com.example.jokeappv2.AppNavigation
+import com.example.jokeappv2.model.Joke
 import com.example.jokeappv2.Resource
 import com.example.jokeappv2.ui.theme.JokeAppV2Theme
 import kotlinx.coroutines.launch
@@ -47,7 +47,10 @@ class MainActivity : ComponentActivity() {
             }
         }
 
-        setContent {
+        setContent { AppNavigation(jokes = list!!) }
+
+
+        /*setContent {
             JokeAppV2Theme {
                 // A surface container using the 'background' color from the theme
                 Surface(
@@ -69,7 +72,7 @@ class MainActivity : ComponentActivity() {
                         GreetingDot(str = res)
                 }
             }
-        }
+        }*/
     }
 }
 

@@ -1,5 +1,6 @@
 package api
 
+import com.example.jokeappv2.model.Joke
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Retrofit

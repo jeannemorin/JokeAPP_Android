@@ -1,6 +1,6 @@
 package com.example.jokeappv2
 
-import api.Joke
+import com.example.jokeappv2.model.Joke
 import api.JokeApi
 
 class Repository {
