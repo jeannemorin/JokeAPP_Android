@@ -1,17 +1,25 @@
-package com.example.jokeappv2
+package com.ex
+
+import com.example.jokeappv2.Repository
+
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import api.Joke
 import api.JokeApi
+import com.example.jokeappv2.Resource
 import com.example.jokeappv2.ui.theme.JokeAppV2Theme
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -19,26 +27,25 @@ import kotlinx.coroutines.runBlocking
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val res = mutableListOf<String>()
+        var res : String? = ""
         val repo = Repository()
-        val list :List<Joke>
+        var list :List<Joke>? = listOf()
 
         //when
         runBlocking {
             launch {
-                when (val resource = repo.getJokeData()) {
+                when (val resource = repo.getJokesData()) {
                     is Resource.Success -> {
-                        res.add("Success: ${resource.data?.setup}..... ${resource.data?.punchline}")
+                        list = resource.data
                     }
                     is Resource.Error -> {
-                        res.add("Error: ${resource.message}")
+                        res = "Error: ${resource.message}"
                     }
 
                 }
 
             }
         }
-
 
         setContent {
             JokeAppV2Theme {
@@ -47,7 +54,19 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    Greeting(res)
+                    list?.let {
+                        Column {
+                            for (joke in list!!) {
+
+                                Greeting("${joke.setup}...${joke.punchline}")
+                                Spacer(modifier = Modifier.height(20.dp))
+
+                            }
+                        }
+                    }
+
+                    if (res?.length!! > 0)
+                        GreetingDot(str = res)
                 }
             }
         }
@@ -55,7 +74,12 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(str: MutableList<String>) {
+fun Greeting(str: String) {
+    Text(text = "$str")
+}
+
+@Composable
+fun GreetingDot(str: String?) {
     Text(text = "$str")
 }
 
