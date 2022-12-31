@@ -22,6 +22,7 @@ class JokeViewModel : ViewModel() {
                     is Resource.Success -> {
                         state = state.copy(
                             jokeData = result.data,
+                            selectedJoke = null,
                             isLoading = false,
                             error = null
                         )
@@ -30,6 +31,7 @@ class JokeViewModel : ViewModel() {
                     is Resource.Error -> {
                         state = state.copy(
                             jokeData = null,
+                            selectedJoke = null,
                             isLoading = false,
                             error = result.message
                         )
@@ -40,10 +42,21 @@ class JokeViewModel : ViewModel() {
             }
         }
     }
+
+    fun selectJoke(selectedJoke : Joke) {
+
+        state = state.copy(
+            jokeData = state.jokeData,
+            selectedJoke = selectedJoke,
+            isLoading = false,
+            error = null
+        )
+    }
 }
 
 data class JokesState(
     val jokeData: List<Joke>? = null,
+    val selectedJoke: Joke? = null,
     val isLoading: Boolean = false,
     val error: String? = null
 )

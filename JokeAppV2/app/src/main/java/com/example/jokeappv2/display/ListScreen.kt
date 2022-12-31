@@ -11,10 +11,17 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
+import com.example.jokeappv2.JokeViewModel
 import com.example.jokeappv2.model.Joke
 
 @Composable
-fun JokesList (jokes : List<Joke>, selectedJoke : (Int) -> Unit) {
+fun ListScreen(vm : JokeViewModel, selectedJoke : (Joke) -> Unit) {
+
+    vm.state.jokeData?.let { JokesList(jokes = it, selectedJoke = selectedJoke) }
+}
+
+@Composable
+fun JokesList (jokes : List<Joke>, selectedJoke : (Joke) -> Unit) {
 
     Column(
             verticalArrangement = Arrangement.spacedBy(12.dp),
@@ -26,14 +33,16 @@ fun JokesList (jokes : List<Joke>, selectedJoke : (Int) -> Unit) {
                     modifier = Modifier
                         .padding(16.dp)
                         .fillMaxWidth()
-                        .clickable(onClick = { selectedJoke(joke.id) })
+                        .clickable(onClick = { selectedJoke(joke) })
                         .clip(RoundedCornerShape(8.dp)),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(
                         text = joke.setup,
                         style = MaterialTheme.typography.h4,
-                        modifier = Modifier.padding(start = 20.dp).clickable(onClick = { selectedJoke(joke.id) })
+                        modifier = Modifier
+                            .padding(start = 20.dp)
+                            .clickable(onClick = { selectedJoke(joke) })
                     )
                 }
             }

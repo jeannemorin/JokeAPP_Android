@@ -34,34 +34,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         viewModel.loadJokes()
-        //setContent { AppNavigation() }
-
-
-        setContent {
-            JokeAppV2Theme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
-                ) {
-                    viewModel.state.jokeData.let {
-                        Column {
-                            for (joke in viewModel.state.jokeData!!) {
-
-                                Greeting("${joke.setup}...${joke.punchline}")
-                                Spacer(modifier = Modifier.height(20.dp))
-
-                            }
-                        }
-                    }
-
-                    viewModel.state.error.let {
-                        GreetingDot(str = viewModel.state.error)
-                    }
-
-                }
-            }
-        }
+        setContent { AppNavigation(vm = viewModel) }
     }
 }
 

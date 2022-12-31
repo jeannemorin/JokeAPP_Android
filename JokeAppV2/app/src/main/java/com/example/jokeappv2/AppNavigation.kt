@@ -10,6 +10,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.jokeappv2.AppDestinations.JOKE_DETAIL_ID_KEY
 import com.example.jokeappv2.display.JokesList
+import com.example.jokeappv2.display.ListScreen
 import com.example.jokeappv2.model.Joke
 
 
@@ -23,10 +24,10 @@ private object AppDestinations {
 }
 
 @Composable
-fun AppNavigation(startDestination: String = AppDestinations.JOKES_ROUTE) {
+fun AppNavigation(startDestination: String = AppDestinations.JOKES_ROUTE, vm : JokeViewModel) {
 
     val navController = rememberNavController()
-    val actions = remember(navController) { AppActions(navController) }
+    val actions = remember(navController) { AppActions(navController, vm) }
 
     NavHost(
         navController = navController,
@@ -35,7 +36,7 @@ fun AppNavigation(startDestination: String = AppDestinations.JOKES_ROUTE) {
         composable(
             AppDestinations.JOKES_ROUTE
         ) {
-            //JokesList(selectedJoke = actions.selectedJoke)
+            ListScreen(vm = vm, selectedJoke = actions.selectedJoke)
         }
 
         composable(
@@ -45,21 +46,22 @@ fun AppNavigation(startDestination: String = AppDestinations.JOKES_ROUTE) {
                     type = NavType.IntType
                 }
             )
-        ) { backStackEntry ->
-            val arguments = requireNotNull(backStackEntry.arguments)
+        ) {
             JokeDetails(
                 navigateUp = actions.navigateUp,
-                joke = Joke("test","test","test",0)
+                joke = vm.state.selectedJoke!!
             )
         }
     }
 }
 
 private class AppActions(
-    navController: NavHostController
+    navController: NavHostController,
+    vm : JokeViewModel
 ) {
-    val selectedJoke: (Int) -> Unit = { catId: Int ->
-        navController.navigate("${AppDestinations.JOKE_DETAIL_ROUTE}/$catId")
+    val selectedJoke: (Joke) -> Unit = { joke : Joke ->
+        vm.selectJoke(joke)
+        navController.navigate("${AppDestinations.JOKE_DETAIL_ROUTE}/${joke.id}")
     }
     val navigateUp: () -> Unit = {
         navController.navigateUp()
