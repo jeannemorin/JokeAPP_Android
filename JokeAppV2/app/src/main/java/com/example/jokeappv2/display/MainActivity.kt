@@ -6,6 +6,7 @@ import com.example.jokeappv2.Repository
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -18,6 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.jokeappv2.AppNavigation
+import com.example.jokeappv2.JokeViewModel
 import com.example.jokeappv2.model.Joke
 import com.example.jokeappv2.Resource
 import com.example.jokeappv2.ui.theme.JokeAppV2Theme
@@ -25,41 +27,26 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 class MainActivity : ComponentActivity() {
+
+    private val viewModel: JokeViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        var res : String? = ""
-        val repo = Repository()
-        var list :List<Joke>? = listOf()
 
-        //when
-        runBlocking {
-            launch {
-                when (val resource = repo.getJokesData()) {
-                    is Resource.Success -> {
-                        list = resource.data
-                    }
-                    is Resource.Error -> {
-                        res = "Error: ${resource.message}"
-                    }
-
-                }
-
-            }
-        }
-
-        setContent { AppNavigation(jokes = list!!) }
+        viewModel.loadJokes()
+        //setContent { AppNavigation() }
 
 
-        /*setContent {
+        setContent {
             JokeAppV2Theme {
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    list?.let {
+                    viewModel.state.jokeData.let {
                         Column {
-                            for (joke in list!!) {
+                            for (joke in viewModel.state.jokeData!!) {
 
                                 Greeting("${joke.setup}...${joke.punchline}")
                                 Spacer(modifier = Modifier.height(20.dp))
@@ -68,11 +55,13 @@ class MainActivity : ComponentActivity() {
                         }
                     }
 
-                    if (res?.length!! > 0)
-                        GreetingDot(str = res)
+                    viewModel.state.error.let {
+                        GreetingDot(str = viewModel.state.error)
+                    }
+
                 }
             }
-        }*/
+        }
     }
 }
 

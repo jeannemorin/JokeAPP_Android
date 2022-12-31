@@ -23,7 +23,7 @@ private object AppDestinations {
 }
 
 @Composable
-fun AppNavigation(startDestination: String = AppDestinations.JOKES_ROUTE, jokes: List<Joke>) {
+fun AppNavigation(startDestination: String = AppDestinations.JOKES_ROUTE) {
 
     val navController = rememberNavController()
     val actions = remember(navController) { AppActions(navController) }
@@ -35,7 +35,7 @@ fun AppNavigation(startDestination: String = AppDestinations.JOKES_ROUTE, jokes:
         composable(
             AppDestinations.JOKES_ROUTE
         ) {
-            JokesList(selectedJoke = actions.selectedJoke, jokes = jokes)
+            //JokesList(selectedJoke = actions.selectedJoke)
         }
 
         composable(
@@ -49,7 +49,7 @@ fun AppNavigation(startDestination: String = AppDestinations.JOKES_ROUTE, jokes:
             val arguments = requireNotNull(backStackEntry.arguments)
             JokeDetails(
                 navigateUp = actions.navigateUp,
-                joke = Joke("","","",0)
+                joke = Joke("test","test","test",0)
             )
         }
     }
