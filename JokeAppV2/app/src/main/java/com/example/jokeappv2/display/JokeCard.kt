@@ -22,27 +22,19 @@ import com.example.jokeappv2.model.Joke
 @Composable
 fun JokeCard(joke: Joke, selectedJoke: (Joke) -> Unit) {
     val shape = RoundedCornerShape(8.dp)
-
     Row (
         modifier = Modifier
             .background(Highlight, shape=shape)
             .defaultMinSize(minHeight = 100.dp)
             .fillMaxWidth()
-            .clickable(onClick = { selectedJoke(joke) }),
-
-
+            .clickable(onClick = { selectedJoke(joke) })
     ) {
-        Column (
-            modifier = Modifier
-                .padding(20.dp)
-                ) {
-
-
+        Column (modifier = Modifier.padding(20.dp)) {
             Text(
                 text = "Joke n°${joke.id}",
                 style = MaterialTheme.typography.body1,
                 fontSize = 16.sp,
-                color= Paragraph,
+                color= Paragraph
             )
             Text(
                 text = joke.setup,
@@ -50,7 +42,7 @@ fun JokeCard(joke: Joke, selectedJoke: (Joke) -> Unit) {
                 modifier = Modifier
                     .clickable(onClick = { selectedJoke(joke) }),
                 fontSize = 20.sp,
-                color = Color.White,
+                color = Color.White
             )
         }
     }
