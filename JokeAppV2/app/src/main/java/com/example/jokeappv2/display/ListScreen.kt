@@ -8,8 +8,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Add
-import androidx.compose.material.icons.rounded.ArrowBack
-import androidx.compose.material.icons.rounded.ArrowDropDown
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -21,13 +19,16 @@ import com.example.jokeappv2.model.Joke
 @Composable
 fun ListScreen(vm : JokeViewModel, selectedJoke : (Joke) -> Unit) {
 
-    Column() {
+    Column {
 
+        Header()
         vm.state.jokeData?.let { JokesList(jokes = it, selectedJoke = selectedJoke, modifier= Modifier.weight(1f)) }
         Spacer(modifier = Modifier.height(20.dp))
         reloadButton(vm = vm)
     }
 }
+
+
 
 @Composable
 fun JokesList (jokes : List<Joke>, selectedJoke : (Joke) -> Unit, modifier : Modifier) {
