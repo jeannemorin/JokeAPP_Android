@@ -17,10 +17,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.jokeappv2.display.JokeCard
-import com.example.jokeappv2.display.ui.theme.Blue200
-import com.example.jokeappv2.display.ui.theme.Dark200
-import com.example.jokeappv2.display.ui.theme.Grey200
-import com.example.jokeappv2.display.ui.theme.Red200
+import com.example.jokeappv2.display.ui.theme.*
 import com.example.jokeappv2.model.Joke
 
 @Composable
@@ -39,7 +36,7 @@ fun JokeDetails (joke: Joke, navigateUp: () -> Unit) {
         Row(
             modifier = Modifier
                 .padding(10.dp)
-                .background(Blue200, shape=shape)
+                .background(Main, shape=shape)
                 .fillMaxWidth()
             ) {
             Column (
