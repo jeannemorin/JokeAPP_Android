@@ -1,7 +1,8 @@
-package com.example.jokeappv2
+package com.example.jokeappv2.network
 
 import com.example.jokeappv2.model.Joke
 import api.JokeApi
+import com.example.jokeappv2.data.Resource
 
 class Repository {
 

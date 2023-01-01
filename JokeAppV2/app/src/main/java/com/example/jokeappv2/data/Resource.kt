@@ -1,4 +1,4 @@
-package com.example.jokeappv2
+package com.example.jokeappv2.data
 
 sealed class Resource<T>(val data: T? = null, val message: String? = null) {
     class Success<T>(data: T?) : Resource<T>(data)
