@@ -16,25 +16,26 @@ import androidx.compose.ui.unit.dp
 import com.example.jokeappv2.JokeViewModel
 import com.example.jokeappv2.model.Joke
 
+
 @Composable
 fun ListScreen(vm : JokeViewModel, selectedJoke : (Joke) -> Unit) {
 
     Column {
 
         Header()
-        vm.state.jokeData?.let { JokesList(jokes = it, selectedJoke = selectedJoke, modifier= Modifier.weight(1f)) }
-        Spacer(modifier = Modifier.height(20.dp))
-        reloadButton(vm = vm)
+        vm.state.jokeData?.let { JokesList(jokes = it, selectedJoke = selectedJoke, vm=vm) }
+        //Spacer(modifier = Modifier.height(20.dp))
+        //reloadButton(vm = vm)
     }
 }
 
 @Composable
-fun JokesList (jokes : List<Joke>, selectedJoke : (Joke) -> Unit, modifier : Modifier) {
+fun JokesList (jokes : List<Joke>, selectedJoke : (Joke) -> Unit, vm: JokeViewModel) {
 
     LazyColumn(
         contentPadding = PaddingValues(horizontal = 16.dp, vertical = 20.dp),
         verticalArrangement = Arrangement.spacedBy(20.dp),
-        modifier = modifier,
+        modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         items(
@@ -42,24 +43,28 @@ fun JokesList (jokes : List<Joke>, selectedJoke : (Joke) -> Unit, modifier : Mod
             itemContent = {
                 JokeCard(joke = it, selectedJoke)
             })
+        item {
+            reloadButton(vm = vm)
+        }
     }
 }
 
 @Composable
 fun reloadButton(vm: JokeViewModel) {
 
-    IconButton(onClick = { vm.loadJokes() }) {
-        Column() {
-            Icon(
-                imageVector = Icons.Rounded.Add,
-                contentDescription = null
-            )
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
 
-            Text("Load 10 more jokes")
+        IconButton(onClick = { vm.loadJokes() }) {
+            Column(horizontalAlignment = Alignment.CenterHorizontally) {
 
+                Icon(
+                    imageVector = Icons.Rounded.Add,
+                    contentDescription = null
+                )
+                Text("Load 10 new jokes")
+            }
         }
 
+
     }
-
-
 }
