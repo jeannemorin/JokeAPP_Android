@@ -13,10 +13,6 @@ import com.example.jokeappv2.display.JokesList
 import com.example.jokeappv2.display.ListScreen
 import com.example.jokeappv2.model.Joke
 
-
-/**
- * Destinations used in the App.
- */
 private object AppDestinations {
     const val JOKES_ROUTE = "jokes"
     const val JOKE_DETAIL_ROUTE = "joke"

@@ -22,9 +22,9 @@ import com.example.jokeappv2.model.Joke
 fun ListScreen(vm : JokeViewModel, selectedJoke : (Joke) -> Unit) {
 
     Column {
-
         Header()
         vm.state.jokeData?.let { JokesList(jokes = it, selectedJoke = selectedJoke, vm=vm) }
+        vm.state.error?.let{ ErrorScreen(vm = vm) }
     }
 }
 
@@ -75,4 +75,12 @@ fun reloadButton(vm: JokeViewModel) {
             )
         }
     }
+}
+
+@Composable
+fun ErrorScreen(vm : JokeViewModel) {
+
+    ErrorCard(vm.state.error!!)
+    Spacer(modifier = Modifier.height(20.dp))
+    reloadButton(vm = vm)
 }
