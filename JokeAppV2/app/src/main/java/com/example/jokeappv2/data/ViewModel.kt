@@ -4,8 +4,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import com.example.jokeappv2.data.Resource
 import com.example.jokeappv2.model.Joke
+import com.example.jokeappv2.network.Repository
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
