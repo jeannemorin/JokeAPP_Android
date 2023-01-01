@@ -28,14 +28,12 @@ fun ListScreen(vm : JokeViewModel, selectedJoke : (Joke) -> Unit) {
     }
 }
 
-
-
 @Composable
 fun JokesList (jokes : List<Joke>, selectedJoke : (Joke) -> Unit, modifier : Modifier) {
 
     LazyColumn(
-        contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
-        verticalArrangement = Arrangement.spacedBy(12.dp),
+        contentPadding = PaddingValues(horizontal = 16.dp, vertical = 20.dp),
+        verticalArrangement = Arrangement.spacedBy(20.dp),
         modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -46,31 +44,6 @@ fun JokesList (jokes : List<Joke>, selectedJoke : (Joke) -> Unit, modifier : Mod
             })
     }
 }
-
-/*
-
-@Composable
-fun JokeCard (joke: Joke, selectedJoke: (Joke) -> Unit) {
-
-    Row(
-        modifier = Modifier
-            .padding(16.dp)
-            .fillMaxWidth()
-            .clickable(onClick = { selectedJoke(joke) })
-            .clip(RoundedCornerShape(8.dp)),
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Text(
-            text = joke.setup,
-            style = MaterialTheme.typography.h4,
-            modifier = Modifier
-                .padding(start = 20.dp)
-                .clickable(onClick = { selectedJoke(joke) })
-        )
-    }
-}
-
- */
 
 @Composable
 fun reloadButton(vm: JokeViewModel) {
