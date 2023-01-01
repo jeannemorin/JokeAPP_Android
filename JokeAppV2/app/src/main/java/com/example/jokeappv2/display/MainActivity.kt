@@ -23,21 +23,3 @@ class MainActivity : ComponentActivity() {
         setContent { AppNavigation(vm = viewModel) }
     }
 }
-
-@Composable
-fun Greeting(str: String) {
-    Text(text = "$str")
-}
-
-@Composable
-fun GreetingDot(str: String?) {
-    Text(text = "$str")
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    JokeAppV2Theme {
-        //Greeting()
-    }
-}

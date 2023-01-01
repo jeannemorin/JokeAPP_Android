@@ -1,17 +1,14 @@
 package com.example.jokeappv2.display
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Add
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import com.example.jokeappv2.JokeViewModel
 import com.example.jokeappv2.model.Joke
@@ -24,8 +21,6 @@ fun ListScreen(vm : JokeViewModel, selectedJoke : (Joke) -> Unit) {
 
         Header()
         vm.state.jokeData?.let { JokesList(jokes = it, selectedJoke = selectedJoke, vm=vm) }
-        //Spacer(modifier = Modifier.height(20.dp))
-        //reloadButton(vm = vm)
     }
 }
 
