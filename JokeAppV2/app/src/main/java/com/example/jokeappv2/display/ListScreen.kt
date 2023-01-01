@@ -61,13 +61,15 @@ fun reloadButton(vm: JokeViewModel) {
             .fillMaxWidth()
             .fillMaxHeight(0.1f)
     ) {
-        Row(modifier = Modifier.padding(10.dp), verticalAlignment = Alignment.CenterVertically) {
+        Row(
+            modifier = Modifier.padding(10.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
             Icon(
                 imageVector = Icons.Rounded.Refresh,
                 contentDescription = null,
-                tint = Main,
+                tint = Main
             )
-
             Text(
                 fontSize = 20.sp,
                 text="Load 10 new jokes",

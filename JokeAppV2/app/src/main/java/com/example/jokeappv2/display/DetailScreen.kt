@@ -22,7 +22,7 @@ import com.example.jokeappv2.model.Joke
 
 @Composable
 fun JokeDetails (joke: Joke, navigateUp: () -> Unit) {
-
+    val shape = RoundedCornerShape(8.dp)
     Column() {
         IconButton(onClick = navigateUp) {
             Icon(
@@ -31,25 +31,24 @@ fun JokeDetails (joke: Joke, navigateUp: () -> Unit) {
             )
         }
         Spacer(modifier = Modifier.height(20.dp))
-        JokeCard(joke = joke, selectedJoke = {} )
-        val shape = RoundedCornerShape(8.dp)
+        JokeCard(
+            joke = joke,
+            selectedJoke = {}
+        )
         Row(
             modifier = Modifier
                 .padding(10.dp)
                 .background(Main, shape=shape)
                 .fillMaxWidth()
             ) {
-            Column (
-                modifier = Modifier
-                    .padding(10.dp)
-            ) {
+            Column (modifier = Modifier.padding(10.dp)) {
                 Text(
                     text = joke.punchline,
                     style = MaterialTheme.typography.body1,
                     modifier = Modifier
                         .padding(start = 20.dp),
                     fontSize = 20.sp,
-                    color = Dark200,
+                    color = Dark200
                 )
             }
         }
