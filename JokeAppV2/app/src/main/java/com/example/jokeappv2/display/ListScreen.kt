@@ -13,8 +13,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.jokeappv2.JokeViewModel
-import com.example.jokeappv2.display.ui.theme.Main
-import com.example.jokeappv2.display.ui.theme.Red200
 import com.example.jokeappv2.display.ui.theme.Secondary
 import com.example.jokeappv2.display.ui.theme.Stroke
 import com.example.jokeappv2.model.Joke

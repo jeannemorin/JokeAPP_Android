@@ -4,6 +4,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.jokeappv2.data.Resource
 import com.example.jokeappv2.model.Joke
 import com.example.jokeappv2.network.Repository
@@ -17,8 +18,7 @@ class JokeViewModel : ViewModel() {
     var state by mutableStateOf(JokesState())
 
     fun loadJokes() {
-        runBlocking {
-            launch {
+        viewModelScope.launch {
                 when (val result = repository.getJokesData()) {
                     is Resource.Success -> {
                         state = state.copy(
@@ -41,7 +41,6 @@ class JokeViewModel : ViewModel() {
                 }
 
             }
-        }
     }
 
     fun selectJoke(selectedJoke : Joke) {
