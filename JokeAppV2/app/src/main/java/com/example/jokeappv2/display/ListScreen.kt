@@ -3,6 +3,7 @@ package com.example.jokeappv2.display
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -21,26 +22,28 @@ import com.example.jokeappv2.model.Joke
 fun ListScreen(vm : JokeViewModel, selectedJoke : (Joke) -> Unit) {
 
     Column() {
-        reloadButton(vm = vm)
+
+        vm.state.jokeData?.let { JokesList(jokes = it, selectedJoke = selectedJoke, modifier= Modifier.weight(1f)) }
         Spacer(modifier = Modifier.height(20.dp))
-        vm.state.jokeData?.let { JokesList(jokes = it, selectedJoke = selectedJoke) }
+        reloadButton(vm = vm)
     }
 }
 
 @Composable
-fun JokesList (jokes : List<Joke>, selectedJoke : (Joke) -> Unit) {
+fun JokesList (jokes : List<Joke>, selectedJoke : (Joke) -> Unit, modifier : Modifier) {
 
-    Column(
-            verticalArrangement = Arrangement.spacedBy(12.dp),
-            modifier = Modifier.fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally
+    LazyColumn(
+        contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
+        verticalArrangement = Arrangement.spacedBy(12.dp),
+        modifier = modifier,
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
-            for (joke in jokes) {
-                JokeCard(joke, selectedJoke)
-            }
-
-        }
-
+        items(
+            items = jokes,
+            itemContent = {
+                JokeCard(joke = it, selectedJoke)
+            })
+    }
 }
 
 @Composable
