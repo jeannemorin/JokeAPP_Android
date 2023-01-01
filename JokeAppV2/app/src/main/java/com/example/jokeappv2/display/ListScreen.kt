@@ -47,6 +47,8 @@ fun JokesList (jokes : List<Joke>, selectedJoke : (Joke) -> Unit, modifier : Mod
     }
 }
 
+/*
+
 @Composable
 fun JokeCard (joke: Joke, selectedJoke: (Joke) -> Unit) {
 
@@ -67,6 +69,8 @@ fun JokeCard (joke: Joke, selectedJoke: (Joke) -> Unit) {
         )
     }
 }
+
+ */
 
 @Composable
 fun reloadButton(vm: JokeViewModel) {
